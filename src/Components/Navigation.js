@@ -1,0 +1,211 @@
+import { Fragment, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import Backdrop from "./Backdrop";
+import SignIn from "../Pages/SignIn";
+import Cart from "./Cart";
+import { useSelector, useDispatch } from "react-redux";
+import { authAction } from "../Store/auth-Slice";
+
+const Navigation = (props) => {
+  const [showSignIn, setshowSignIn] = useState(false);
+  const [toggleCart, setToggleCart] = useState(false);
+  const numberOfCartItems = useSelector((state) => state.cart.items).length;
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => {
+    return state.auth.isLoggedIn;
+  });
+  const naviToggle = useRef();
+  let showNotification = false;
+  if (numberOfCartItems >= 1) {
+    showNotification = true;
+  }
+
+  const navRespondItemsOnClickHandler = () => {
+    naviToggle.current.click();
+  };
+  const cartOnClickHandler = () => {
+    setToggleCart((showState) => !showState);
+  };
+
+  const logoutHandler = () => {
+    dispatch(authAction.logout());
+  };
+  return (
+    <Fragment>
+      <div className="navigation">
+        <div className="navigation__flex-container--top">
+          <div className="navigation__logo">
+            <img
+              src="https://cdn1.iconfinder.com/data/icons/city-outline-2/512/building_city_architecture_bookstore_book_store_shop_urban-512.png"
+              alt="bookstore"
+              className="navigation__icon"
+            />
+            <Link to="/" className="navigation__title">
+              隨便改的名書店
+            </Link>
+          </div>
+          <form action="#" className="search">
+            <input type="text" className="search__input" placeholder="搜索" />
+            <button className="search__button">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <div className="navigation__user-info">
+            {!isLoggedIn && <Link to="signup">註冊</Link>}
+            {!isLoggedIn && (
+              <button
+                className="btn btn-purple"
+                onClick={() => setshowSignIn(true)}
+              >
+                登入
+              </button>
+            )}
+            {isLoggedIn && (
+              <button className="btn btn-purple" onClick={logoutHandler}>
+                登出
+              </button>
+            )}
+            <button
+              className="btn btn-tranparent navigation__cartIcon"
+              onClick={cartOnClickHandler}
+            >
+              <i class="fa-solid fa-cart-arrow-down"></i>
+              {showNotification && (
+                <div className="navigation__notification">
+                  {numberOfCartItems}
+                </div>
+              )}
+            </button>
+          </div>
+          <div className="navigation-respond">
+            <input
+              type="checkbox"
+              class="navigation-respond__checkbox"
+              id="navi-toggle"
+              ref={naviToggle}
+            />
+            <label class="navigation-respond__button" for="navi-toggle">
+              <span class="navigation-respond__icon"></span>
+            </label>
+            <nav className="navigation-respond__nav">
+              <div className="navigation-respond__content">
+                <ul className="navigation-respond__list">
+                  <li className="navigation-respond__item">
+                    <Link to="/">分店地址</Link>
+                  </li>
+
+                  <li className="navigation-respond__item">
+                    <Link to="signup" onClick={navRespondItemsOnClickHandler}>
+                      註冊
+                    </Link>
+                  </li>
+
+                  <li className="navigation-respond__item">
+                    <Link to="signin">登入</Link>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div className="navigation__flex-container--bottom">
+          <div className="navigation__category">
+            <a href="/">
+              <span>禮品卡</span>
+            </a>
+            <a href="/">
+              <span>暢銷書</span>
+            </a>
+            <a href="/">
+              <span>新書到貨</span>
+            </a>
+            <div className="navigation__fiction">
+              <span>小說</span>
+              <div className="navigation__category-fiction">
+                <ul className="navigation__category-fiction--list">
+                  <li className="navigation__category-fiction--item">
+                    懸疑/推理小說
+                  </li>
+                  <li className="navigation__category-fiction--item">
+                    <Link to="booklist/sciencefiction">科幻小說</Link>
+                  </li>
+                  <li className="navigation__category-fiction--item">
+                    恐怖/驚悚小說
+                  </li>
+                  <li className="navigation__category-fiction--item">
+                    溫馨/療癒小說
+                  </li>
+                  <li className="navigation__category-fiction--item">
+                    <Link to="booklist/love">愛情小說</Link>
+                  </li>
+                  <li className="navigation__category-fiction--item">
+                    羅曼史/言情小說
+                  </li>
+                  <li className="navigation__category-fiction--item">
+                    <Link to="booklist/history">歷史小說</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="navigation__non-fiction">
+              <span>非小說</span>
+              <div className="navigation__category-non-fiction">
+                <ul className="navigation__category-non-fiction--list">
+                  <li className="navigation__category-non-fiction--item">
+                    商業理財
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    藝術設計
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    人文社科
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    心理勵志
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    宗教命理
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    自然科普
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    醫療保健
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    飲食
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    旅遊
+                  </li>
+                  <li className="navigation__category-non-fiction--item">
+                    教科書
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <a href="/">
+              <span>青少年小說</span>
+            </a>
+            <a href="/">
+              <span>童書</span>
+            </a>
+            <a href="/">
+              <span>外語書</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div></div>
+      {/* the above div is for maintaining the height of the nav */}
+      {toggleCart && <Cart />}
+      {showSignIn && (
+        <Backdrop>
+          <SignIn close={() => setshowSignIn(false)} />
+        </Backdrop>
+      )}
+    </Fragment>
+  );
+};
+
+export default Navigation;
