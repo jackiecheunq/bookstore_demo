@@ -118,7 +118,7 @@ const SignUp = (props) => {
       }
 
       const saveUserDataRespond = await fetch(
-        `https://bookstore-3c010-default-rtdb.firebaseio.com/users/${userId}.json`,
+        `https://bookstore-3c010-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`,
         {
           method: "PUT",
           body: JSON.stringify({

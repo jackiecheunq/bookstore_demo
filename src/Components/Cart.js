@@ -60,7 +60,7 @@ const Cart = () => {
     setIsLoading(true);
     try {
       const respond = await fetch(
-        `https://bookstore-3c010-default-rtdb.firebaseio.com/users/${userId}.json`
+        `https://bookstore-3c010-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`
       );
       if (respond.ok) {
         const data = await respond.json();

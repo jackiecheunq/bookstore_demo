@@ -25,8 +25,8 @@ function App() {
     };
 
     dispatch(async (dispatch) => {
-      let { token, userId, expirationTime } = loginInfo;
       if (loginInfo) {
+        let { token, userId, expirationTime } = loginInfo;
         const retrieveStoredToken = () => {
           remainingTime = calculateRemainingTime(expirationTime);
           if (remainingTime <= 0) {
