@@ -5,8 +5,10 @@ import SignIn from "../Pages/SignIn";
 import Cart from "./Cart";
 import { useSelector, useDispatch } from "react-redux";
 import { authAction } from "../Store/auth-Slice";
+import ConfirmMessage from "./ConfirmMessage";
 
 const Navigation = (props) => {
+  const [showWelcome, setShowWelcome] = useState(true);
   const [showSignIn, setshowSignIn] = useState(false);
   const [toggleCart, setToggleCart] = useState(false);
   const numberOfCartItems = useSelector((state) => state.cart.items).length;
@@ -30,6 +32,43 @@ const Navigation = (props) => {
   const logoutHandler = () => {
     dispatch(authAction.logout());
   };
+  const fictionlist = [
+    {
+      id: "detective",
+      chineseName: "偵探小說",
+    },
+    { id: "sciencefiction", chineseName: "科幻小說" },
+    { id: "horror", chineseName: "恐怖小說" },
+    { id: "love", chineseName: "愛情小說" },
+    { id: "history", chineseName: "歷史小說" },
+    { id: "fanatsy", chineseName: "奇幻小說" },
+  ];
+
+  const nonfictionlist = [
+    {
+      id: "business",
+      chineseName: "商業理財",
+    },
+    { id: "art&design", chineseName: "藝術設計" },
+    { id: "soc", chineseName: "人文社科" },
+    { id: "travel", chineseName: "旅遊" },
+  ];
+
+  const bookListOfRespondNav = (list) => {
+    return list.map((book) => {
+      return (
+        <li>
+          <Link
+            to={`booklist/${book.id}`}
+            onClick={navRespondItemsOnClickHandler}
+          >
+            {book.chineseName}
+          </Link>
+        </li>
+      );
+    });
+  };
+
   return (
     <Fragment>
       <div className="navigation">
@@ -69,7 +108,7 @@ const Navigation = (props) => {
               className="btn btn-tranparent navigation__cartIcon"
               onClick={cartOnClickHandler}
             >
-              <i class="fa-solid fa-cart-arrow-down"></i>
+              <i className="fa-solid fa-cart-arrow-down"></i>
               {showNotification && (
                 <div className="navigation__notification">
                   {numberOfCartItems}
@@ -80,20 +119,16 @@ const Navigation = (props) => {
           <div className="navigation-respond">
             <input
               type="checkbox"
-              class="navigation-respond__checkbox"
+              className="navigation-respond__checkbox"
               id="navi-toggle"
               ref={naviToggle}
             />
-            <label class="navigation-respond__button" for="navi-toggle">
-              <span class="navigation-respond__icon"></span>
+            <label className="navigation-respond__button" htmlFor="navi-toggle">
+              <span className="navigation-respond__icon"></span>
             </label>
             <nav className="navigation-respond__nav">
               <div className="navigation-respond__content">
                 <ul className="navigation-respond__list">
-                  <li className="navigation-respond__item">
-                    <Link to="/">分店地址</Link>
-                  </li>
-
                   <li className="navigation-respond__item">
                     <Link to="signup" onClick={navRespondItemsOnClickHandler}>
                       註冊
@@ -101,7 +136,60 @@ const Navigation = (props) => {
                   </li>
 
                   <li className="navigation-respond__item">
-                    <Link to="signin">登入</Link>
+                    <Link
+                      to="/"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navRespondItemsOnClickHandler();
+                        setTimeout(() => setshowSignIn(true), 300);
+                      }}
+                    >
+                      登入
+                    </Link>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <Link to="/" onClick={navRespondItemsOnClickHandler}>
+                      禮品卡
+                    </Link>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <Link
+                      to="booklist/latestbook"
+                      onClick={navRespondItemsOnClickHandler}
+                    >
+                      暢銷書
+                    </Link>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <label htmlFor="fiction-toggle">小說</label>
+                    <input
+                      type="checkbox"
+                      id="fiction-toggle"
+                      className="navigation-respond__list-toggler"
+                    />
+                    <ul className="navigation-respond__toggled-list">
+                      {bookListOfRespondNav(fictionlist)}
+                    </ul>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <label htmlFor="nonfiction-toggle">非小說</label>
+                    <input
+                      type="checkbox"
+                      id="nonfiction-toggle"
+                      className="navigation-respond__list-toggler"
+                    />
+                    <ul className="navigation-respond__toggled-list">
+                      {bookListOfRespondNav(nonfictionlist)}
+                    </ul>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <Link to="/">青少年小說</Link>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <Link to="/">童書</Link>
+                  </li>
+                  <li className="navigation-respond__item">
+                    <Link to="/">外語書</Link>
                   </li>
                 </ul>
               </div>
@@ -113,9 +201,7 @@ const Navigation = (props) => {
             <a href="/">
               <span>禮品卡</span>
             </a>
-            <a href="/">
-              <span>暢銷書</span>
-            </a>
+            <Link to="booklist/latestbook">暢銷書</Link>
             <a href="/">
               <span>新書到貨</span>
             </a>
@@ -124,25 +210,22 @@ const Navigation = (props) => {
               <div className="navigation__category-fiction">
                 <ul className="navigation__category-fiction--list">
                   <li className="navigation__category-fiction--item">
-                    懸疑/推理小說
+                    <Link to="booklist/detective">偵探小說</Link>
                   </li>
                   <li className="navigation__category-fiction--item">
                     <Link to="booklist/sciencefiction">科幻小說</Link>
                   </li>
                   <li className="navigation__category-fiction--item">
-                    恐怖/驚悚小說
-                  </li>
-                  <li className="navigation__category-fiction--item">
-                    溫馨/療癒小說
+                    <Link to="booklist/horror">恐怖小說</Link>
                   </li>
                   <li className="navigation__category-fiction--item">
                     <Link to="booklist/love">愛情小說</Link>
                   </li>
                   <li className="navigation__category-fiction--item">
-                    羅曼史/言情小說
+                    <Link to="booklist/history">歷史小說</Link>
                   </li>
                   <li className="navigation__category-fiction--item">
-                    <Link to="booklist/history">歷史小說</Link>
+                    <Link to="booklist/fantasy">奇幻小說</Link>
                   </li>
                 </ul>
               </div>
@@ -202,6 +285,21 @@ const Navigation = (props) => {
       {showSignIn && (
         <Backdrop>
           <SignIn close={() => setshowSignIn(false)} />
+        </Backdrop>
+      )}
+      {showWelcome && (
+        <Backdrop>
+          <ConfirmMessage
+            message={
+              "歡迎來到本網站，本網站內所有商品和帳號服務純屬虛構， 註冊帳號時請注意不要輸入真實信息，謝謝！"
+            }
+            close={() => {
+              setShowWelcome(false);
+            }}
+            confirm={() => {
+              setShowWelcome(false);
+            }}
+          />
         </Backdrop>
       )}
     </Fragment>

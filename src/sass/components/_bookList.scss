@@ -5,10 +5,38 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
   @include respond(phone) {
     width: 80%;
     height: 45rem;
   }
+
+  &__left-button,
+  &__right-button {
+    background-color: transparent;
+    font-size: 5rem;
+    color: rgba($color-grey-dark, 0.9);
+    border: none;
+    z-index: 1;
+    position: absolute;
+    cursor: pointer;
+  }
+  &__left-button {
+    top: 50%;
+    left: 6rem;
+    @include respond(phone) {
+      left: 3rem;
+    }
+  }
+
+  &__right-button {
+    top: 50%;
+    right: 6rem;
+    @include respond(phone) {
+      right: 3rem;
+    }
+  }
+
   &__title {
     height: 20%;
     display: flex;
@@ -42,14 +70,20 @@
     }
   }
   &__gallery {
+    height: 80%;
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow: scroll;
-    height: 80%;
-    & > * {
-      &:not(:last-child) {
-        margin-right: 4rem;
+    &-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin: 0 auto;
+      & > * {
+        &:not(:last-child) {
+          margin-right: 4rem;
+        }
       }
     }
   }
@@ -67,6 +101,9 @@
     box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.7);
     &:hover {
       transform: scale(1.1);
+    }
+    @include respond(phone) {
+      height: 16rem;
     }
   }
 }

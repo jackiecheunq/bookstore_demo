@@ -169,6 +169,14 @@
     }
     &--item {
       list-style: none;
+      a {
+        text-decoration: none;
+        color: $color-black;
+        &:hover {
+          font-weight: 500;
+          color: $color-primary-dark;
+        }
+      }
 
       cursor: pointer;
       &:hover {
@@ -190,6 +198,24 @@
       display: none;
       &:checked ~ .navigation-respond__nav {
         width: 100%;
+      }
+      label {
+        cursor: pointer;
+      }
+    }
+
+    &__toggled-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease-out;
+      font-size: 2.5rem;
+      background-color: $color-grey;
+    }
+
+    &__list-toggler {
+      display: none;
+      &:checked + .navigation-respond__toggled-list {
+        max-height: 50rem;
       }
     }
 
@@ -256,10 +282,6 @@
       & * {
         text-decoration: none;
         color: $color-black;
-        &:hover {
-          color: $color-primary-dark;
-          font-weight: 400;
-        }
       }
     }
     &__item {

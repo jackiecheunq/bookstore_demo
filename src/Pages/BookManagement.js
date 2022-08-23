@@ -67,6 +67,9 @@ const BookManagement = (props) => {
             <option value="love">愛情小說</option>
             <option value="sciencefiction">科幻小說</option>
             <option value="history">歷史小說</option>
+            <option value="horror">恐怖小說</option>
+            <option value="detective">偵探小說</option>
+            <option value="fantasy">奇幻小說</option>
             <option value="travel">旅遊書</option>
             <option value="latestbook">本週暢銷書籍</option>
           </select>

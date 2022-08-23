@@ -3,6 +3,9 @@
   width: 100%;
   background-color: $color-primary-dark;
   position: relative;
+  @include respond(phone) {
+    height: 40rem;
+  }
   &__carousel {
     margin: 0 auto;
     width: 80%;
@@ -34,6 +37,8 @@
     left: 35%;
     transform: translateX(-50%);
     @include respond(phone) {
+      left: 40%;
+      top: 40%;
       font-size: 4rem;
     }
   }
@@ -54,9 +59,15 @@
   }
   &__left-button {
     left: 6rem;
+    @include respond(phone) {
+      left: 3rem;
+    }
   }
   &__right-button {
     right: 6rem;
+    @include respond(phone) {
+      right: 3rem;
+    }
   }
 
   &__index {

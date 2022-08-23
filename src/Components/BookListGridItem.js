@@ -1,9 +1,12 @@
-import BookListItem from "./BookListItem";
-
 const BookListGridItem = (props) => {
   return (
     <div className="book-list__grid-unit">
-      <BookListItem img={props.book.bookCover} />
+      <img
+        data-src={props.book.bookCover}
+        src={`https://picsum.photos/id/870/300/300?grayscale&blur=2`}
+        className="book-list__item lazy-loading"
+        alt="booklist-item"
+      />
       <div className="book-list__book-info margin-left-medium">
         <h3 className="font-500">{props.book.title}</h3>
         <span>{props.book.author}</span>

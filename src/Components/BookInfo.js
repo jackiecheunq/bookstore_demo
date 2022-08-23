@@ -29,7 +29,7 @@ const BookInfo = (props) => {
       </div>
       <div className="book-info__text">
         <button className="book-info__close-tag" onClick={props.close}>
-          <i class="fa-regular fa-circle-xmark"></i>
+          <i className="fa-regular fa-circle-xmark"></i>
         </button>
         <h2 className="border-bottom-basic margin-bottom-small">購買書籍</h2>
         <h3 className="font-500">{props.book.title}</h3>
@@ -45,7 +45,7 @@ const BookInfo = (props) => {
         <div className="flex-basic">
           <input
             type="number"
-            class="book-info__number-input margin-right-medium"
+            className="book-info__number-input margin-right-medium"
             placeholder="數量"
             step="1"
             min="1"

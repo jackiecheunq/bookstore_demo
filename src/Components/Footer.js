@@ -46,7 +46,7 @@ const Footer = (props) => {
               <i className="fa-brands fa-cc-mastercard white-font font-big"></i>
             </a>
             <a href="/">
-              <i className="fa-brands fa-alipay white-font font-big"></i>
+              <i className="fa-brands fa-cc-paypal  white-font font-big"></i>
             </a>
           </div>
         </div>
@@ -56,7 +56,9 @@ const Footer = (props) => {
               管理員選項
             </Link>
           )}
-          <span>© 2022 All Rights Reserved</span>
+          <span className="text-align-center">
+            github @jackiecheunq 2022 @ All Rights Reserved
+          </span>
           <a href="/" className="white-font">
             Terms of Use
           </a>

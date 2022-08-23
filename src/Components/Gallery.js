@@ -91,14 +91,14 @@ const Gallery = (props) => {
         </ul>
         <span className="gallery__caption">Welcome to My BookStore</span>
         <button className="gallery__left-button" onClick={leftMoveHandler}>
-          <i class="fa-solid fa-chevron-left"></i>
+          <i className="fa-solid fa-chevron-left"></i>
         </button>
         <button
           className="gallery__right-button"
           onClick={rightMoveHandler}
           ref={rightButtonRef}
         >
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
         <div className="gallery__index">{indexDots}</div>
       </div>

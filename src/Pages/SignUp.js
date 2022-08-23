@@ -112,9 +112,7 @@ const SignUp = (props) => {
         userId = result.localId;
         token = result.idToken;
       } else {
-        throw new Error(
-          signUpRespond ? signUpRespond.error.message : "No response"
-        );
+        throw new Error(signUpRespond.error.message ?? "No response");
       }
 
       const saveUserDataRespond = await fetch(

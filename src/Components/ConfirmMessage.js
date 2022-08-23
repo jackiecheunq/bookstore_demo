@@ -2,7 +2,7 @@ const ConfirmMessage = (props) => {
   return (
     <div className="comfirm-message">
       <button className="comfirm-message__close-tag" onClick={props.close}>
-        <i class="fa-regular fa-circle-xmark"></i>
+        <i className="fa-regular fa-circle-xmark"></i>
       </button>
       {props.loading ? (
         <p>loading ... </p>
