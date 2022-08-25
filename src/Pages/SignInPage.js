@@ -57,9 +57,7 @@ const SignInPage = (props) => {
             expiresIn: result.expiresIn,
           })
         );
-        console.log(result);
         resetForm();
-        props.close();
         navigate("/", { replace: true });
       } else {
         const result = await respond.json();

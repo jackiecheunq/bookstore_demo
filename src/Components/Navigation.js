@@ -80,7 +80,7 @@ const Navigation = (props) => {
               className="navigation__icon"
             />
             <Link to="/" className="navigation__title">
-              隨便改的名書店
+              隨意書店
             </Link>
           </div>
           <form action="#" className="search">
@@ -159,6 +159,20 @@ const Navigation = (props) => {
                         }}
                       >
                         登入
+                      </Link>
+                    </li>
+                  )}
+                  {isLoggedIn && (
+                    <li className="navigation-respond__item">
+                      <Link
+                        to="/"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navRespondItemsOnClickHandler();
+                          setTimeout(logoutHandler, 300);
+                        }}
+                      >
+                        登出
                       </Link>
                     </li>
                   )}
