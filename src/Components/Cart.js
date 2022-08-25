@@ -129,7 +129,7 @@ const Cart = () => {
 
   return (
     <Fragment>
-      <div className="cart">
+      <div className="cart" onClick={(e) => e.stopPropagation()}>
         <div className="cart__content">{itemsList}</div>
         <div className="cart__total">
           <h3 className="font-500">總價：${totalPrice}</h3>

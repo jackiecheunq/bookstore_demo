@@ -19,7 +19,7 @@ const BookInfo = (props) => {
     props.close();
   };
   return (
-    <div className="book-info">
+    <div className="book-info" onClick={(e) => e.stopPropagation()}>
       <div className="book-info__img">
         <img
           src={props.book.bookCover}

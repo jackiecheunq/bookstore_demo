@@ -1,7 +1,7 @@
 import useInput from "../Store/hooks";
 import { useDispatch } from "react-redux";
 import { authAction } from "../Store/auth-Slice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const isNotEmpty = (value) => value.trim() !== "";
 const isEmail = (value) =>
@@ -171,7 +171,9 @@ const SignUp = (props) => {
       >
         <div className="form__group signup__content__caption">
           <h1>建立你的網上書店帳號</h1>
-          <h3>已有帳號？按此登入</h3>
+          <h3>
+            已有帳號？<Link to="/signin">按此登入</Link>
+          </h3>
         </div>
         <div className="form__group signup__input--lastname">
           <input

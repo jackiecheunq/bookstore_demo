@@ -9,6 +9,7 @@ import BookManagement from "./Pages/BookManagement";
 import OrdersListPage from "./Pages/OrdersListPage";
 import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "./Store/auth-Slice";
+import SignInPage from "./Pages/SignInPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -55,6 +56,7 @@ function App() {
         <Route exact path="booklist/:booklistType" element={<BookListGrid />} />
         <Route exact path="booklist" element={<Navigate to="/" replace />} />
         <Route exact path="signup" element={<SignUp />} />
+        <Route exact path="signin" element={<SignInPage />} />
         {isLoggedIn && (
           <Route exact path="bookmanagement" element={<BookManagement />} />
         )}

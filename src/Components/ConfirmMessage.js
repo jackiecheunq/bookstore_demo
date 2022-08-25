@@ -1,6 +1,6 @@
 const ConfirmMessage = (props) => {
   return (
-    <div className="comfirm-message">
+    <div className="comfirm-message" onClick={(e) => e.stopPropagation()}>
       <button className="comfirm-message__close-tag" onClick={props.close}>
         <i className="fa-regular fa-circle-xmark"></i>
       </button>

@@ -43,6 +43,21 @@
       grid-row: 1 span;
       align-self: center;
       text-align: center;
+      a {
+        &,
+        &:visited,
+        &:hover,
+        &:active {
+          text-decoration: none;
+        }
+        & {
+          color: $color-black;
+        }
+        &:hover {
+          font-weight: 600;
+          color: $color-primary-dark;
+        }
+      }
     }
     .form__group {
       width: 100%;

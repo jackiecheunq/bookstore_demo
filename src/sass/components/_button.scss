@@ -44,3 +44,18 @@
     }
   }
 }
+
+.btn-to-top {
+  border-radius: 3px;
+  border: none;
+  width: 5rem;
+  height: 5rem;
+  background-color: $color-grey;
+  color: $color-black;
+  font-size: 3rem;
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  animation: btn-to-top-popup 0.3s;
+  cursor: pointer;
+}

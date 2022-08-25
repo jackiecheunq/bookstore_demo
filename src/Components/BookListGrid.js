@@ -114,7 +114,7 @@ const BookListGrid = (props) => {
   return (
     <Fragment>
       {bookDetail && (
-        <Backdrop>
+        <Backdrop close={() => setbookDetail(null)}>
           <BookInfo book={bookDetail} close={() => setbookDetail(null)} />
         </Backdrop>
       )}

@@ -5,6 +5,7 @@
   border-radius: 3px;
   display: flex;
   background-color: $color-white;
+  z-index: 20;
   @include respond(phone) {
     width: 90%;
   }

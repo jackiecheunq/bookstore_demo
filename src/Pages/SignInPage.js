@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
-const SignIn = (props) => {
+const SignInPage = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -76,11 +76,8 @@ const SignIn = (props) => {
   };
 
   return (
-    <div className="signin" onClick={(e) => e.stopPropagation()}>
-      <button className="signin__close-tag" onClick={props.close}>
-        <i className="fa-regular fa-circle-xmark"></i>
-      </button>
-      <div className="signin__content">
+    <div className="signin-page">
+      <div className="signin-page__content">
         <div className="signin__type-selection">
           <button className="signin__type-selection--phone">驗證碼登入</button>
           <button className="signin__type-selection--email">電郵登入</button>
@@ -127,4 +124,4 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+export default SignInPage;

@@ -117,6 +117,17 @@ const Navigation = (props) => {
             </button>
           </div>
           <div className="navigation-respond">
+            <button
+              className="btn btn-tranparent navigation__cartIcon margin-right-small"
+              onClick={cartOnClickHandler}
+            >
+              <i className="fa-solid fa-cart-arrow-down"></i>
+              {showNotification && (
+                <div className="navigation__notification">
+                  {numberOfCartItems}
+                </div>
+              )}
+            </button>
             <input
               type="checkbox"
               className="navigation-respond__checkbox"
@@ -125,28 +136,32 @@ const Navigation = (props) => {
             />
             <label className="navigation-respond__button" htmlFor="navi-toggle">
               <span className="navigation-respond__icon"></span>
+              <div></div>
             </label>
             <nav className="navigation-respond__nav">
               <div className="navigation-respond__content">
                 <ul className="navigation-respond__list">
-                  <li className="navigation-respond__item">
-                    <Link to="signup" onClick={navRespondItemsOnClickHandler}>
-                      註冊
-                    </Link>
-                  </li>
-
-                  <li className="navigation-respond__item">
-                    <Link
-                      to="/"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navRespondItemsOnClickHandler();
-                        setTimeout(() => setshowSignIn(true), 300);
-                      }}
-                    >
-                      登入
-                    </Link>
-                  </li>
+                  {!isLoggedIn && (
+                    <li className="navigation-respond__item">
+                      <Link to="signup" onClick={navRespondItemsOnClickHandler}>
+                        註冊
+                      </Link>
+                    </li>
+                  )}
+                  {!isLoggedIn && (
+                    <li className="navigation-respond__item">
+                      <Link
+                        to="/"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navRespondItemsOnClickHandler();
+                          setTimeout(() => setshowSignIn(true), 300);
+                        }}
+                      >
+                        登入
+                      </Link>
+                    </li>
+                  )}
                   <li className="navigation-respond__item">
                     <Link to="/" onClick={navRespondItemsOnClickHandler}>
                       禮品卡
@@ -198,13 +213,9 @@ const Navigation = (props) => {
         </div>
         <div className="navigation__flex-container--bottom">
           <div className="navigation__category">
-            <a href="/">
-              <span>禮品卡</span>
-            </a>
+            <Link to="/">禮品卡</Link>
             <Link to="booklist/latestbook">暢銷書</Link>
-            <a href="/">
-              <span>新書到貨</span>
-            </a>
+            <Link to="/">新書到貨</Link>
             <div className="navigation__fiction">
               <span>小說</span>
               <div className="navigation__category-fiction">
@@ -267,28 +278,35 @@ const Navigation = (props) => {
                 </ul>
               </div>
             </div>
-            <a href="/">
-              <span>青少年小說</span>
-            </a>
-            <a href="/">
-              <span>童書</span>
-            </a>
-            <a href="/">
-              <span>外語書</span>
-            </a>
+            <Link to="/" onClick={navRespondItemsOnClickHandler}>
+              青少年小說
+            </Link>
+            <Link to="/" onClick={navRespondItemsOnClickHandler}>
+              童書
+            </Link>
+            <Link to="/" onClick={navRespondItemsOnClickHandler}>
+              外語書
+            </Link>
           </div>
         </div>
       </div>
       <div></div>
       {/* the above div is for maintaining the height of the nav */}
-      {toggleCart && <Cart />}
+      {toggleCart && (
+        <Backdrop
+          close={() => setToggleCart(false)}
+          colorClass="backdrop--transparent"
+        >
+          <Cart />
+        </Backdrop>
+      )}
       {showSignIn && (
-        <Backdrop>
+        <Backdrop close={() => setshowSignIn(false)}>
           <SignIn close={() => setshowSignIn(false)} />
         </Backdrop>
       )}
       {showWelcome && (
-        <Backdrop>
+        <Backdrop close={() => setShowWelcome(false)}>
           <ConfirmMessage
             message={
               "歡迎來到本網站，本網站內所有商品和帳號服務純屬虛構， 註冊帳號時請注意不要輸入真實信息，謝謝！"
