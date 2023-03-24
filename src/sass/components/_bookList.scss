@@ -63,7 +63,6 @@
     grid-template-columns: repeat(auto-fit, 29rem);
     justify-content: space-between;
     gap: 3rem;
-    overflow: scroll;
     @include respond(tab-port) {
       grid-template-columns: 1fr;
       grid-template-rows: 10rem 1fr 1fr;
@@ -74,6 +73,9 @@
     display: flex;
     align-items: center;
     overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
+    }
     &-content {
       height: 100%;
       display: flex;

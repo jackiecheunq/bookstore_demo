@@ -12,13 +12,11 @@ const Gallery = (props) => {
   const [isRightClick, setIsRightClick] = useState(true);
   const rightButtonRef = useRef();
   let imgTransition = {
-    transform: `translateX(-${indexOfCurrentImg}00%`,
+    transform: `translateX(-${indexOfCurrentImg}00%)`,
   };
+  let interval = useRef();
   useEffect(() => {
-    let interval = setInterval(() => rightButtonRef.current.click(), 10000);
-    return () => {
-      clearInterval(interval);
-    };
+    interval.current = setInterval(() => rightButtonRef.current.click(), 10000);
   }, []);
 
   useEffect(() => {
@@ -83,8 +81,22 @@ const Gallery = (props) => {
     });
   };
 
+  const onMouseEnterHandler = () => {
+    if (interval.current) {
+      clearInterval(interval.current);
+    }
+  };
+
+  const onMouseLeaveHandler = () => {
+    interval.current = setInterval(() => rightButtonRef.current.click(), 10000);
+  };
+
   return (
-    <div className="gallery">
+    <div
+      className="gallery"
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
+    >
       <div className="gallery__carousel">
         <ul className="gallery__ul" style={imgTransition}>
           {fakeImgList}

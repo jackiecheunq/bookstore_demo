@@ -6,9 +6,12 @@
   padding: 3rem;
   border-radius: 3px;
   animation: popup 0.5s;
-  z-index: 20;
+  z-index: 25;
   @include respond(phone) {
     width: 90%;
+  }
+  &--grey {
+    background-color: $color-peach-light;
   }
   &__close-tag {
     color: $color-primary-light;

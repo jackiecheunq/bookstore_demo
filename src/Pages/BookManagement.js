@@ -13,17 +13,19 @@ const BookManagement = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
     const bookInfo = {
       title: titleRef.current.value,
       author: authorRef.current.value,
       type: typeRef.current.value,
-      originalPrice: originalPriceRef.current.value
-        ? originalPriceRef.current.value
-        : null,
+      originalPrice: originalPriceRef.current.value ?? null,
       currentPrice: currentPriceRef.current.value,
       bookCover: bookCoverRef.current.value,
     };
+    if (!/^\d+$/.test(bookInfo.currentPrice)) {
+      alert("請輸入正確數字！");
+      return;
+    }
+
     const sendData = async () => {
       const response = await fetch(
         `https://bookstore-3c010-default-rtdb.firebaseio.com/booklists/${bookInfo.type}.json?auth=${token}`,

@@ -1,8 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../Store/cart-Slice";
-import { createPortal } from "react-dom";
-import Backdrop from "./Backdrop";
 import CartItem from "./CartItem";
 import ConfirmMessage from "./ConfirmMessage";
 import { Link, useNavigate } from "react-router-dom";
@@ -156,18 +154,15 @@ const Cart = () => {
           )}
         </div>
       </div>
-      {showConfirm &&
-        createPortal(
-          <Backdrop>
-            <ConfirmMessage
-              close={closeConfirmHandler}
-              message={`寄送地址：${address}`}
-              loading={isLoading}
-              confirm={newOrderHandler}
-            />
-          </Backdrop>,
-          document.getElementById("confirm-message")
-        )}
+      {showConfirm && (
+        <ConfirmMessage
+          close={closeConfirmHandler}
+          message={`寄送地址：${address}`}
+          loading={isLoading}
+          confirm={newOrderHandler}
+          colorClass={"comfirm-message--grey"}
+        />
+      )}
     </Fragment>
   );
 };

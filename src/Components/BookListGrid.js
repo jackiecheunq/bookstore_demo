@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef, useCallback } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import BookListGridItem from "./BookListGridItem";
 import NotFound from "../Pages/NotFound";
@@ -84,7 +84,12 @@ const BookListGrid = (props) => {
   );
 
   const imagesRef = useRef(null);
-  const imgObserver = useCallback((node) => {
+
+  useEffect(() => {
+    imagesRef.current = document.querySelectorAll(
+      ".book-list__item.lazy-loading"
+    );
+
     const intObs = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
         if (en.intersectionRatio > 0) {
@@ -95,21 +100,15 @@ const BookListGrid = (props) => {
           } else {
             currentImg.src = newImgSrc;
           }
-          intObs.unobserve(node); // detach the observer when done
+          intObs.unobserve(currentImg); // detach the observer when done
         }
       });
     });
-    intObs.observe(node);
-  }, []);
 
-  useEffect(() => {
-    imagesRef.current = document.querySelectorAll(
-      ".book-list__item.lazy-loading"
-    );
     if (imagesRef.current) {
-      imagesRef.current.forEach((img) => imgObserver(img));
+      imagesRef.current.forEach((img) => intObs.observe(img));
     }
-  }, [imgObserver, imagesRef, books]);
+  }, [imagesRef, books]);
 
   return (
     <Fragment>
