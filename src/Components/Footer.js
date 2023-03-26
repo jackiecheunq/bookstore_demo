@@ -2,26 +2,31 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Footer = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const anchor = [
+    "關於我們",
+    "支援",
+    "禮品卡",
+    "聯絡我們",
+    "退款和退貨政策",
+  ].map((item, index) => {
+    return (
+      <a
+        key={index}
+        href="/"
+        className="white-font"
+        target="_blank"
+        rel="noreferrer noopenner"
+      >
+        {item}
+      </a>
+    );
+  });
+
   return (
     <div className="footer">
       <div className="footer__grid-container">
-        <div className="footer__about">
-          <a href="/" className="white-font">
-            關於我們
-          </a>
-          <a href="/" className="white-font">
-            支援
-          </a>
-          <a href="/" className="white-font">
-            禮品卡
-          </a>
-          <a href="/" className="white-font">
-            聯絡我們
-          </a>
-          <a href="/" className="white-font">
-            退款和退貨政策
-          </a>
-        </div>
+        <div className="footer__about">{anchor}</div>
         <div className="footer__social-info">
           <span className="white-font">追蹤我們！</span>
           <div className="footer__social-info-icon">

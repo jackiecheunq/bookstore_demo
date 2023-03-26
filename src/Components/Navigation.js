@@ -83,7 +83,11 @@ const Navigation = (props) => {
               隨意書店
             </Link>
           </div>
-          <form action="#" className="search" disabled={true}>
+          <form
+            action="#"
+            className="search"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <input
               type="text"
               className="search__input"
