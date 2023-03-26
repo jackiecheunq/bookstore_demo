@@ -81,21 +81,21 @@ const Gallery = (props) => {
     });
   };
 
-  const onMouseEnterHandler = () => {
-    if (interval.current) {
-      clearInterval(interval.current);
-    }
-  };
+  // const onMouseEnterHandler = () => {
+  //   if (interval.current) {
+  //     clearInterval(interval.current);
+  //   }
+  // };
 
-  const onMouseLeaveHandler = () => {
-    interval.current = setInterval(() => rightButtonRef.current.click(), 10000);
-  };
+  // const onMouseLeaveHandler = () => {
+  //   interval.current = setInterval(() => rightButtonRef.current.click(), 10000);
+  // };
 
   return (
     <div
       className="gallery"
-      onMouseEnter={onMouseEnterHandler}
-      onMouseLeave={onMouseLeaveHandler}
+      // onMouseEnter={onMouseEnterHandler}
+      // onMouseLeave={onMouseLeaveHandler}
     >
       <div className="gallery__carousel">
         <ul className="gallery__ul" style={imgTransition}>
