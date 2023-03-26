@@ -83,8 +83,12 @@ const Navigation = (props) => {
               隨意書店
             </Link>
           </div>
-          <form action="#" className="search">
-            <input type="text" className="search__input" placeholder="搜索" />
+          <form action="#" className="search" disabled={true}>
+            <input
+              type="text"
+              className="search__input"
+              placeholder="搜索（只供演示）"
+            />
             <button className="search__button">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
