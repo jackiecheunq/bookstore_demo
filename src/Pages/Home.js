@@ -38,7 +38,12 @@ const Home = (props) => {
   return (
     <Fragment>
       <NewsBar />
-      <Gallery />
+      <Gallery imgs={[
+        "https://img.shashin.cc/2024/09/e1e02416e3d7a89c6eea0f6bcfbdc8c5.jpg",
+        "https://img.shashin.cc/2024/09/53af1be19ce8b0f0f88581705307c347.jpg",
+        "https://img.shashin.cc/2024/09/6c8df49bfd5b5fa8ffb25c8744e327e9.webp",
+        "https://img.shashin.cc/2024/09/1337c62aef2d55ff18b2299d85cd0609.jpg",
+      ]} />
       <BookList booklistType="latestbook" id="latestbook" />
       <BookList booklistType="history" />
       <BookList booklistType="love" />
