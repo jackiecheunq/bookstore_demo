@@ -5,29 +5,35 @@ import { useEffect, useReducer } from "react";
 const reducer = (state, action) => {
   const transitionDuration = 800;
   const { currentImgIndex, realImgIndex, imgsLength } = state;
-  const lastImgIndex = imgsLength - 1
+  const prevDuplicateIndex = 0;
+  const nextDuplicateIndex = imgsLength + 1
+  const firstImgPositionIndex = 1;
+  const lastImgPositonIndex = imgsLength;
+  const lastImgIndex = imgsLength - 1;
 
   switch (action.type) {
     case "NEXT":
       if (currentImgIndex === imgsLength) {
         return { imgsLength, realImgIndex: 0, currentImgIndex: currentImgIndex + 1, transitionDuration };
-      } else if (currentImgIndex === imgsLength + 1) {
+      } else if (currentImgIndex === nextDuplicateIndex) {
         return { imgsLength, realImgIndex: 0, currentImgIndex: 1, transitionDuration: 0 }
-      } else if (currentImgIndex === 0 && realImgIndex === lastImgIndex) {
+      } else if (currentImgIndex === prevDuplicateIndex && realImgIndex === lastImgIndex) {
         return { imgsLength, realImgIndex: 0, currentImgIndex: currentImgIndex + 1, transitionDuration }
       }
       return { imgsLength, realImgIndex: realImgIndex + 1, currentImgIndex: currentImgIndex + 1, transitionDuration };
     case "PREV":
-      if (currentImgIndex === 1) {
+      if (currentImgIndex === firstImgPositionIndex) {
         return { imgsLength, realImgIndex: lastImgIndex, currentImgIndex: currentImgIndex - 1, transitionDuration };
-      } else if (currentImgIndex === 0) {
-        return { imgsLength, realImgIndex: lastImgIndex, currentImgIndex: lastImgIndex + 1, transitionDuration: 0 };
-      } else if (currentImgIndex === imgsLength + 1 && realImgIndex === 0) {
+      } else if (currentImgIndex === prevDuplicateIndex) {
+        return { imgsLength, realImgIndex: lastImgIndex, currentImgIndex: lastImgPositonIndex, transitionDuration: 0 };
+      } else if (currentImgIndex === nextDuplicateIndex && realImgIndex === 0) {
         return { imgsLength, realImgIndex: lastImgIndex, currentImgIndex: currentImgIndex - 1, transitionDuration }
       }
       return { imgsLength, realImgIndex: realImgIndex - 1, currentImgIndex: currentImgIndex - 1, transitionDuration };
     case "SET":
-      return { imgsLength, realImgIndex: action.target, currentImgIndex: action.target + 1, transitionDuration };
+      if (realImgIndex !== action.target) {
+        return { imgsLength, realImgIndex: action.target, currentImgIndex: action.target + 1, transitionDuration };
+      } return state;
     case "UPDATE_IMG":
       return { ...state, imgsLength: action.imgsLength };
     default:
@@ -55,7 +61,6 @@ const Gallery = (props) => {
     imgListItem.push(<li className={`gallery__li`}><img src={imgs[0]} alt="carousel-img" className="gallery__img" key={`${imgs[0]}-duplicate-next`} /></li>)
     return imgListItem;
   }
-
 
   const goPrev = () => {
     const dispatchPerv = () => dispatch({ type: "PREV" })
